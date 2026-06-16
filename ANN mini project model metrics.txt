@@ -1,0 +1,20 @@
+ANN mini project model metrics
+---
+
+python train.py --data data --epochs 1 --batch 128 --out model.joblib
+Test loss=1.3666 acc=0.5967 prec=0.7289
+
+python train.py --data data --epochs 5 --batch 128 --out model.joblib
+Test loss=2.3676 acc=0.7567 prec=0.8256
+
+python train.py --data data --epochs 10 --batch 128 --out model.joblib
+Test loss=5.7057 acc=0.5833 prec=0.7727
+
+python train.py --data data --epochs 25 --batch 128 --out model.joblib
+Test loss=3.6690 acc=0.7017 prec=0.8021
+
+python train.py --data data --epochs 50 --batch 128 --out model.joblib
+Test loss=3.1107 acc=0.7400 prec=0.8145
+
+python train.py --data data --epochs 100 --batch 128 --out model.joblib
+Test loss=3.2207 acc=0.7417 prec=0.8153
