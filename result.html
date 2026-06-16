@@ -1,0 +1,77 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="panel">
+        <header class="panel__header">
+          <h1 class="panel__title">Prediction Result</h1>
+          <p class="panel__subtitle">Model output for your uploaded image.</p>
+        </header>
+        <div class="result">
+          {% if error %}
+          <div class="alert alert--error">
+            <h2 class="alert__title">Prediction unavailable</h2>
+            <p class="alert__message">{{ error }}</p>
+          </div>
+          {% else %}
+          <div class="result__header">
+            <div class="result__badge">{{ prediction.class }}</div>
+            <p class="result__lead">Primary class suggested for the uploaded tile.</p>
+          </div>
+          {% if prediction.heuristic %}
+          <section class="section-card">
+            <header class="section-card__header">
+              <h2 class="section-card__title">Green coverage analysis</h2>
+              <p class="section-card__intro">Tabular summary of how the green-pixel heuristic evaluated this tile.</p>
+            </header>
+            <table class="green-table">
+              <thead>
+                <tr class="green-table__row green-table__row--header">
+                  <th class="green-table__cell green-table__cell--label">Measure</th>
+                  <th class="green-table__cell green-table__cell--value">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="green-table__row">
+                  <td class="green-table__cell green-table__cell--label">Green coverage</td>
+                  <td class="green-table__cell green-table__cell--value">{{ (prediction.heuristic.green_ratio * 100) | round(1) }}%</td>
+                </tr>
+                <tr class="green-table__row">
+                  <td class="green-table__cell green-table__cell--label">Green pixels</td>
+                  <td class="green-table__cell green-table__cell--value">{{ prediction.heuristic.green_pixels }} / {{ prediction.heuristic.total_pixels }}</td>
+                </tr>
+                <tr class="green-table__row">
+                  <td class="green-table__cell green-table__cell--label">Greenness delta (mean)</td>
+                  <td class="green-table__cell green-table__cell--value">{{ prediction.heuristic.greenness_delta_mean | round(4) }}</td>
+                </tr>
+                <tr class="green-table__row">
+                  <td class="green-table__cell green-table__cell--label">Avg green channel</td>
+                  <td class="green-table__cell green-table__cell--value">{{ prediction.heuristic.avg_green_channel | round(4) }} &plusmn; {{ prediction.heuristic.std_green_channel | round(4) }}</td>
+                </tr>
+                <tr class="green-table__row">
+                  <td class="green-table__cell green-table__cell--label">Green delta threshold</td>
+                  <td class="green-table__cell green-table__cell--value">{{ prediction.heuristic.green_delta_threshold }}</td>
+                </tr>
+                <tr class="green-table__row">
+                  <td class="green-table__cell green-table__cell--label">Coverage threshold</td>
+                  <td class="green-table__cell green-table__cell--value">{{ (prediction.heuristic.coverage_threshold * 100) | round(1) }}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          {% endif %}
+          {% endif %}
+        </div>
+        <footer class="panel__footer">
+          <a class="btn btn--ghost" href="/">Upload another image</a>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

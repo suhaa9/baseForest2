@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CNN-based Deforestation Classifier</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="panel">
+        <header class="panel__header">
+          <h1 class="panel__title">Satellite Deforestation Classifier</h1>
+          <p class="panel__subtitle">Upload a tile to determine if the area is deforested.</p>
+        </header>
+        <form class="upload-form" action="/predict" method="post" enctype="multipart/form-data">
+          <label class="field">
+            <span class="field__label">Select an image</span>
+            <input class="field__input" type="file" name="file" accept="image/*" required />
+          </label>
+          <div class="form-actions">
+            <button class="btn" type="submit">Run Prediction</button>
+          </div>
+        </form>
+        <footer class="panel__footer">
+          <p class="hint">Supported formats: JPG, JPEG, PNG. Images are resized to 128&times;128 for analysis.</p>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
